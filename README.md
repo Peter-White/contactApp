@@ -1,1 +1,2 @@
 # contactApp
+This is a school app that practices my ability to create a JavaFX application with full UI control in the form of a Contact storage app. The user can add a contact with fields including first name, last name, phone number, and notes which will then be displayed on a selectable table. The user then has the choice to edit the exiting information of a selected contact or delete the selected contact which will then update the table in real time accordingly.
