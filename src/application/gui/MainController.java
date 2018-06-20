@@ -115,7 +115,9 @@ public class MainController {
     				// TODO Auto-generated catch block
     				e.printStackTrace();
     			}
-        	}      	
+        	} else {
+        		pass = true;
+        	}
 		}
         
     	contactTable.setItems(data.getContacts());

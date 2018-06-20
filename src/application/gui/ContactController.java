@@ -33,8 +33,7 @@ public class ContactController {
 	public boolean valid() {
 		if(firstNameField.getText().isEmpty() || 
 			lastNameField.getText().isEmpty() || 
-			phoneNumberField.getText().isEmpty() || 
-			notesField.getText().isEmpty()) {
+			phoneNumberField.getText().isEmpty()) {
 			return false;
 		}
 		return true;
