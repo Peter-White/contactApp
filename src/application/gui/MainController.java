@@ -103,6 +103,7 @@ public class MainController {
 				e.printStackTrace();
 			}
         	contactTable.setItems(data.getContacts());
+        	contactTable.refresh();
         	contactTable.getSelectionModel().select(contact);
         }
 	}
