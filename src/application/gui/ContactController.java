@@ -1,7 +1,6 @@
 package application.gui;
 
 import application.data.Contact;
-import application.data.ContactData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -29,6 +28,16 @@ public class ContactController {
 	
 	public void initialize() {
 		notesField.setWrapText(true);
+	}
+	
+	public boolean valid() {
+		if(firstNameField.getText().isEmpty() || 
+			lastNameField.getText().isEmpty() || 
+			phoneNumberField.getText().isEmpty() || 
+			notesField.getText().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 	
 	public Contact processResults() {

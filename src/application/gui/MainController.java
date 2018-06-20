@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Dialog;
@@ -93,19 +94,33 @@ public class MainController {
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
         
-        Optional<ButtonType> result = dialog.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
-        	try {
-        		contact = contactController.editContact(contact);
-				data.saveContacts();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	contactTable.setItems(data.getContacts());
-        	contactTable.refresh();
-        	contactTable.getSelectionModel().select(contact);
-        }
+        boolean pass = false;
+        Optional<ButtonType> result;
+        
+        while (!pass) {
+        	result = dialog.showAndWait();
+        	if(result.isPresent() && result.get() == ButtonType.OK) {
+        		if(!contactController.valid()) {
+	        		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		        	alert.setTitle("Alarm");
+		        	alert.setContentText("Please fill all fields");
+		        	Optional<ButtonType> alertResult = alert.showAndWait();
+		        	continue;
+        		}
+            	try {
+            		contact = contactController.editContact(contact);
+    				data.saveContacts();
+    				pass = true;
+    			} catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}
+        	}      	
+		}
+        
+    	contactTable.setItems(data.getContacts());
+    	contactTable.refresh();
+    	contactTable.getSelectionModel().select(contact);
 	}
 	
 	@FXML
