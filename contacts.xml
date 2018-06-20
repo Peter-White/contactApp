@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contacts>
+<contact>
+	<first_name>E3</first_name>
+	<last_name>Bethesda</last_name>
+	<phone_number>345-388-9211</phone_number>
+	<notes>Pretty Good</notes>
+</contact>
+<contact>
+	<first_name>E3</first_name>
+	<last_name>EA</last_name>
+	<phone_number>666-666-6969</phone_number>
+	<notes>Ponderous, audience insulting trash. 2 out of 10</notes>
+</contact>
+<contact>
+	<first_name>E3</first_name>
+	<last_name>Square Enix</last_name>
+	<phone_number>438-383-2812</phone_number>
+	<notes>Decent selection, no presentation or effort. Why was this even a show. 4 out of 10.</notes>
+</contact>
+</contacts>
