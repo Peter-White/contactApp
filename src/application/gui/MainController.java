@@ -9,10 +9,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
@@ -27,13 +27,21 @@ public class MainController {
 	@FXML
 	private ContextMenu contactContext;
 	
+	@FXML
+	private MenuItem editContact;
+	
+	@FXML
+	private MenuItem deleteContact;
+	
 	ContactData data;
 	
 	public void initialize() {
 		 data = new ContactData();
 		 data.loadContacts();
 		 contactTable.setItems(data.getContacts());
-		 contactTable.getSelectionModel().select(0);
+		 if(data.getContacts().size() > 0) {
+			 contactTable.getSelectionModel().select(0);
+		 }
 	}
 	
 	@FXML
@@ -91,6 +99,11 @@ public class MainController {
 	@FXML
 	public void edit() {
 		Contact contact = data.getContact((contactTable.getSelectionModel().getSelectedItem()));
+		
+		if(contact == null) {
+			return;
+		}
+		
 		Dialog<ButtonType> dialog = new Dialog<>();
 		dialog.initOwner(mainBorderPane.getScene().getWindow());
 		dialog.setTitle("Edit Contact");

@@ -5,36 +5,32 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
-			minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" 
-			xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" 
-			fx:id="mainBorderPane"
-			fx:controller="application.gui.MainController">
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.gui.MainController">
    <center>
       <TableView fx:id="contactTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
            	<TableColumn prefWidth="75.0" text="First Name">
                 <cellValueFactory>
-                    <PropertyValueFactory property="firstName"/>
+                    <PropertyValueFactory property="firstName" />
                 </cellValueFactory>
            	</TableColumn>
            	<TableColumn prefWidth="75.0" text="Last Name">
                 <cellValueFactory>
-                    <PropertyValueFactory property="lastName"/>
+                    <PropertyValueFactory property="lastName" />
                 </cellValueFactory>
            	</TableColumn>
             <TableColumn prefWidth="75.0" text="Phone Number">
                 <cellValueFactory>
-                    <PropertyValueFactory property="phoneNumber"/>
+                    <PropertyValueFactory property="phoneNumber" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn prefWidth="75.0" text="Notes">
                 <cellValueFactory>
-                    <PropertyValueFactory property="notes"/>
+                    <PropertyValueFactory property="notes" />
                 </cellValueFactory>
             </TableColumn>
         </columns>
@@ -51,9 +47,9 @@
                 <Menu mnemonicParsing="false" text="Contacts">
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#newContactDialog" text="Add Contact" />
-                        <MenuItem mnemonicParsing="false" onAction="#edit" text="Edit Contact" />
-                        <MenuItem mnemonicParsing="false" onAction="#delete" text="Delete Contact" />
-                    	<MenuItem mnemonicParsing="false" text="Close" onAction="#close"/>
+                        <MenuItem fx:id="editContact" mnemonicParsing="false" onAction="#edit" text="Edit Contact" />
+                        <MenuItem fx:id="deleteContact" mnemonicParsing="false" onAction="#delete" text="Delete Contact" />
+                    	<MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
                   </items>
                 </Menu>
               </menus>

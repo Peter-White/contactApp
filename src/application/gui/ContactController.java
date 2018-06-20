@@ -23,7 +23,12 @@ public class ContactController {
 		firstNameField.setText(contact.getFirstName());
 		lastNameField.setText(contact.getLastName());
 		phoneNumberField.setText(contact.getPhoneNumber());
-		notesField.appendText(contact.getNotes());
+		
+		if(contact.getNotes().equals(" ")) {
+			notesField.clear();
+		} else {
+			notesField.appendText(contact.getNotes());
+		}
 	}
 	
 	public void initialize() {
@@ -43,7 +48,13 @@ public class ContactController {
 		String firstName = firstNameField.getText();
 		String lastName = lastNameField.getText();
 		String phoneNumberFeild = phoneNumberField.getText();
-		String notesFeild = notesField.getText();
+		String notesFeild;
+		
+		if(notesField.getText().equals("")) {
+			notesFeild = " ";
+		} else {
+			notesFeild = notesField.getText();
+		}
 		
 		Contact contact = new Contact(firstName, lastName, phoneNumberFeild, notesFeild);
 		
