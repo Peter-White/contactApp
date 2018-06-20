@@ -12,8 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
@@ -68,6 +66,44 @@ public class MainController {
 				e.printStackTrace();
 			}
         	contactTable.setItems(data.getContacts());
+        	contactTable.getSelectionModel().select(contact);
+        }
+	}
+	
+	@FXML
+	public void edit() {
+		Contact contact = data.getContact((contactTable.getSelectionModel().getSelectedItem()));
+		Dialog<ButtonType> dialog = new Dialog<>();
+		dialog.initOwner(mainBorderPane.getScene().getWindow());
+		dialog.setTitle("Edit Contact");
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		fxmlLoader.setLocation(getClass().getResource("createContactDialog.fxml"));
+		
+		try {
+			dialog.getDialogPane().setContent(fxmlLoader.load());
+		} catch (IOException e) {
+			System.out.println("Couldn't load the dialog");
+			e.printStackTrace();
+			return;
+		}
+		
+		ContactController contactController = fxmlLoader.getController();
+		contactController.setContact(contact);
+		
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        
+        Optional<ButtonType> result = dialog.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+        	try {
+        		contact = contactController.editContact(contact);
+				data.saveContacts();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	contactTable.setItems(data.getContacts());
+        	contactTable.getSelectionModel().select(contact);
         }
 	}
 	
@@ -94,32 +130,6 @@ public class MainController {
 		if(result.isPresent() && result.get() == ButtonType.YES) {
         	Platform.exit();
         }
-	}
-	
-	@FXML
-	public void edit() {
-		Contact contact = contactTable.getSelectionModel().getSelectedItem();
-		Dialog<ButtonType> dialog = new Dialog<>();
-		dialog.initOwner(mainBorderPane.getScene().getWindow());
-		dialog.setTitle("Edit Contact");
-		FXMLLoader fxmlLoader = new FXMLLoader();
-		fxmlLoader.setLocation(getClass().getResource("createContactDialog.fxml"));
-		
-		try {
-			dialog.getDialogPane().setContent(fxmlLoader.load());
-		} catch (IOException e) {
-			System.out.println("Couldn't load the dialog");
-			e.printStackTrace();
-			return;
-		}
-		
-		ContactController contactController = fxmlLoader.getController();
-		contactController.setContact(contact);
-		
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-        
-        Optional<ButtonType> result = dialog.showAndWait();
 	}
 	
 	@FXML

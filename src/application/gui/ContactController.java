@@ -1,6 +1,7 @@
 package application.gui;
 
 import application.data.Contact;
+import application.data.ContactData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -28,7 +29,6 @@ public class ContactController {
 	
 	public void initialize() {
 		notesField.setWrapText(true);
-		System.out.println("Run");
 	}
 	
 	public Contact processResults() {
@@ -39,6 +39,14 @@ public class ContactController {
 		
 		Contact contact = new Contact(firstName, lastName, phoneNumberFeild, notesFeild);
 		
+		return contact;
+	}
+	
+	public Contact editContact(Contact contact) {
+		contact.setFirstName(firstNameField.getText());
+		contact.setLastName(lastNameField.getText());
+		contact.setPhoneNumber(phoneNumberField.getText());
+		contact.setNotes(notesField.getText());
 		return contact;
 	}
 	
